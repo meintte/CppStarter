@@ -89,8 +89,8 @@ jobs:
           cd build
           ctest --build-config Debug
 
-      - name: uninstall
-        run: cmake --build build --target uninstall
+      # - name: uninstall
+      #   run: cmake --build build --target uninstall
 
   standalone:
     runs-on: ${{ inputs.os }}
@@ -103,8 +103,8 @@ jobs:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
-      # - name: configure
-      #   run: cmake -Sstandalone -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_BUILD_TYPE=Debug
+      - name: configure
+        run: cmake -Sstandalone -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_BUILD_TYPE=Debug
 
       - name: build
         run: cmake --build build -j4
