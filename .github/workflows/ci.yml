@@ -65,8 +65,29 @@ jobs:
     runs-on: ${{ inputs.os }}
     needs: build
     steps:
-      - name: install
-        run: cmake --build build --target install
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+
+      - name: build and install library
+        run: |
+          cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
+          sudo cmake --build build --target install
+          rm -rf build
+
+      - name: configure test
+        run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
+
+      - name: build test
+        run: cmake --build build --config Debug -j4
+
+      - name: run test
+        run: |
+          cd build
+          ctest --build-config Debug
 
       - name: uninstall
         run: cmake --build build --target uninstall
@@ -75,8 +96,18 @@ jobs:
     runs-on: ${{ inputs.os }}
     needs: build
     steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+
+      # - name: configure
+      #   run: cmake -Sstandalone -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_BUILD_TYPE=Debug
+
       - name: build
-        run: cmake --build build --target GreeterStandalone -j4
+        run: cmake --build build -j4
 
       - name: run
         run: ./build/Greeter
