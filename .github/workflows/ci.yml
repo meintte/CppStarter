@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        default: "ubuntu-latest"
+        type: string
+      dependencies:
+        default: echo "No dependencies"
+        type: string
+      CPM_SOURCE_CACHE:
+        default: ${{ github.workspace }}/cpm_modules
+        type: string
+      CTEST_OUTPUT_ON_FAILURE:
+        default: 1
+        type: number
+      ENABLE_TEST_COVERAGE:
+        default: 1
+        type: number
+      CMAKE_BUILD_TYPE:
+        default: Debug
+        type: string
+    secrets:
+      CODECOV_TOKEN:
+        required: true
+
+env:
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ${{ inputs.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+
+      - name: install dependencies
+        run: ${{ inputs.dependencies }}
+
+      - name: configure
+        run: cmake -Sall -Bbuild -DENABLE_TEST_COVERAGE=${{ inputs.ENABLE_TEST_COVERAGE }} -DCMAKE_BUILD_TYPE=${{ inputs.CMAKE_BUILD_TYPE}}  -DTEST_INSTALLED_VERSION=1
+
+      - name: build
+        run: cmake --build build --target MyguiTests -j4
+
+      - name: test
+        run: |
+          cd build
+          ctest --build-config Debug
+
+      - name: collect code coverage
+        if: ${{ inputs.ENABLE_TEST_COVERAGE == 1 }}
+        run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+
+      - name: return to directory
+        run: cd ..
+
+  install:
+    runs-on: ${{ inputs.os }}
+    needs: build
+    steps:
+      - name: install
+        run: cmake --build build --target install
+
+      - name: uninstall
+        run: cmake --build build --target uninstall
+
+  standalone:
+    runs-on: ${{ inputs.os }}
+    needs: build
+    steps:
+      - name: build
+        run: cmake --build build --target MyguiStandalone -j4
+
+      - name: run
+        run: ./build/Mygui
