@@ -1,9 +1,10 @@
-[![Actions Status](https://github.com/meintte/MyGui/workflows/MacOS/badge.svg)](https://github.com/meintte/MyGui/actions)
-[![Actions Status](https://github.com/meintte/MyGui/workflows/Windows/badge.svg)](https://github.com/meintte/MyGui/actions)
-[![Actions Status](https://github.com/meintte/MyGui/workflows/Ubuntu/badge.svg)](https://github.com/meintte/MyGui/actions)
-[![Actions Status](https://github.com/meintte/MyGui/workflows/Style/badge.svg)](https://github.com/meintte/MyGui/actions)
-[![Actions Status](https://github.com/meintte/MyGui/workflows/Install/badge.svg)](https://github.com/meintte/MyGui/actions)
-[![codecov](https://codecov.io/gh/meintte/MyGui/branch/main/graph/badge.svg?token=XG8BZ8JS79)](https://codecov.io/gh/meintte/MyGui)
+[![Actions Status](https://github.com/meintte/CppStarter/workflows/MacOS/badge.svg)](https://github.com/meintte/MyGui/actions)
+[![Actions Status](https://github.com/meintte/CppStarter/workflows/Windows/badge.svg)](https://github.com/meintte/MyGui/actions)
+[![Actions Status](https://github.com/meintte/CppStarter/workflows/Ubuntu/badge.svg)](https://github.com/meintte/MyGui/actions)
+[![Actions Status](https://github.com/meintte/CppStarter/workflows/Style/badge.svg)](https://github.com/meintte/MyGui/actions)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/304827d2fc1248bb83a3abb52c7047bc)](https://www.codacy.com/gh/meintte/CppStarter/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=meintte/CppStarter&amp;utm_campaign=Badge_Grade)
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/meintte/CppStarter.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/meintte/CppStarter/context:cpp)
+[![codecov](https://codecov.io/gh/meintte/CppStarter/branch/master/graph/badge.svg?token=VN1BPUL9KC)](https://codecov.io/gh/meintte/CppStarter)
 
 <p align="center">
   <img src="https://repository-images.githubusercontent.com/254842585/4dfa7580-7ffb-11ea-99d0-46b8fe2f4170" height="175" width="auto" />
