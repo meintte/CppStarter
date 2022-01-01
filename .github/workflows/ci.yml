@@ -75,7 +75,7 @@ jobs:
       - name: build and install library
         run: |
           cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
-          ${{ (startsWith(inputs.os, 'windows') && '') || 'sudo ' }}cmake --build build --target install
+          ${{ (startsWith(inputs.os, 'windows') && 'cmake') || 'sudo cmake' }} --build build --target install
           rm -rf build
 
       - name: configure test
