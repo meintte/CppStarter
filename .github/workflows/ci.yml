@@ -75,7 +75,7 @@ jobs:
       - name: build and install library
         run: |
           cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
-          sudo cmake --build build --target install
+          ${{ (startsWith(input.os, 'windows') && 'sudo ') || '' }}cmake --build build --target install
           rm -rf build
 
       - name: configure test
@@ -110,4 +110,4 @@ jobs:
         run: cmake --build build -j4
 
       - name: run
-        run: ./build/Greeter
+        run: ./build/Greeter${{ (startsWith(input.os, 'windows') && '.exe') || '' }}
