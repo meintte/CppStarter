@@ -19,9 +19,9 @@ CPMAddPackage("gh:onqtam/doctest#2.4.5")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.0")
 
 if(TEST_INSTALLED_VERSION)
-  find_package(Greeter REQUIRED)
+  find_package(GreeterMainProject REQUIRED)
 else()
-  CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+  CPMAddPackage(NAME GreeterMainProject SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 endif()
 
 # ---- Create binary ----
@@ -29,7 +29,7 @@ endif()
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${sources})
 target_link_libraries(${PROJECT_NAME} doctest::doctest)
-target_link_libraries(${PROJECT_NAME} Greeter)
+target_link_libraries(${PROJECT_NAME} GreeterMainProject::GreeterMainProject)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
 
 # enable compiler warnings
