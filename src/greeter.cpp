@@ -1,6 +1,6 @@
 #include <greeter/greeter.hpp>
 
-namespace greeter {
+namespace greeter_namespace {
 
     Greeter::Greeter(std::string _name) : name(std::move(_name)) {}
 
@@ -18,4 +18,4 @@ namespace greeter {
         }
     }
 
-}  // namespace greeter
+}  // namespace greeter_namespace

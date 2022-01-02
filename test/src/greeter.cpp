@@ -5,12 +5,12 @@
 #include <string>
 
 TEST_CASE("Greeter") {
-    greeter::Greeter greeter("Tests");
+    greeter_namespace::Greeter greeter("Tests");
 
-    CHECK(greeter.greet(greeter::LanguageCode::EN) == "Hello, Tests!");
-    CHECK(greeter.greet(greeter::LanguageCode::DE) == "Hallo Tests!");
-    CHECK(greeter.greet(greeter::LanguageCode::ES) == "¡Hola Tests!");
-    CHECK(greeter.greet(greeter::LanguageCode::FR) == "Bonjour Tests!");
+    CHECK(greeter.greet(greeter_namespace::LanguageCode::EN) == "Hello, Tests!");
+    CHECK(greeter.greet(greeter_namespace::LanguageCode::DE) == "Hallo Tests!");
+    CHECK(greeter.greet(greeter_namespace::LanguageCode::ES) == "¡Hola Tests!");
+    CHECK(greeter.greet(greeter_namespace::LanguageCode::FR) == "Bonjour Tests!");
 }
 
 TEST_CASE("Greeter version") {
