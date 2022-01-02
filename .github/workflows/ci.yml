@@ -44,7 +44,7 @@ jobs:
         run: ${{ inputs.dependencies }}
 
       - name: configure
-        run: cmake -Sall -Bbuild -DENABLE_TEST_COVERAGE=${{ inputs.ENABLE_TEST_COVERAGE }} -DCMAKE_BUILD_TYPE=${{ inputs.CMAKE_BUILD_TYPE}}  -DTEST_INSTALLED_VERSION=1
+        run: cmake -Sall -Bbuild -DENABLE_TEST_COVERAGE=${{ inputs.ENABLE_TEST_COVERAGE }} -DCMAKE_BUILD_TYPE=${{ inputs.CMAKE_BUILD_TYPE}}
 
       - name: build
         run: cmake --build build --target GreeterTests -j4
