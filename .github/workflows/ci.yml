@@ -59,6 +59,7 @@ jobs:
       - name: collect code coverage
         if: ${{ inputs.ENABLE_TEST_COVERAGE == 1 }}
         run: |
+          pip install gcovr
           make test_coverage -j4
           bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
           export CODACY_PROJECT_TOKEN==${{ secrets.CODACY_TOKEN}}
