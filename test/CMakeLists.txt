@@ -58,4 +58,20 @@ doctest_discover_tests(${PROJECT_NAME})
 if(ENABLE_TEST_COVERAGE)
   target_compile_options(${PROJECT_NAME} PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
   target_link_options(${PROJECT_NAME} PUBLIC -fprofile-arcs -ftest-coverage)
+  include(../cmake/CodeCoverage.cmake)
+  add_compile_options(-O0 -g)
+  setup_target_for_coverage_gcovr_xml(
+    NAME
+    test_coverage # New target name
+    EXECUTABLE
+    ${PROJECT_NAME}
+    -j
+    ${PROCESSOR_COUNT} # Executable in PROJECT_BINARY_DIR
+    # DEPENDENCIES testrunner # Dependencies to build first
+    BASE_DIRECTORY
+    "../" # Base directory for report (defaults to PROJECT_SOURCE_DIR)
+    # EXCLUDE "src/dir1/*" "src/dir2/*" # Patterns to exclude (can be relative to BASE_DIRECTORY,
+    # with CMake 3.4+) NO_DEMANGLE # Don't demangle C++ symbols even if c++filt is found
+  )
+
 endif()
