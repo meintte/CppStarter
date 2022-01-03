@@ -64,10 +64,7 @@ jobs:
           cmake --build build --target test_coverage -j4
           bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
           export CODACY_PROJECT_TOKEN==${{ secrets.CODACY_TOKEN}}
-          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r test_coverage
-
-      # - name: return to directory
-      # run: cd ..
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r build/test_coverage.xml
 
   install:
     runs-on: ${{ inputs.os }}
